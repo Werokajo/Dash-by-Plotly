@@ -36,6 +36,7 @@ def display_cell_clicked_on(cdata):
         cell_row = int(cdata['rowId'])
         new_color = ["yellow" if x==cell_row else "blue" for x in range(0,len(df))]
         new_size = [30 if x==cell_row else 10 for x in range(0,len(df))]
+        print(new_size)
 
         fig = px.scatter(df, x="total_bill", y="tip")
         fig['data'][0]['marker']['color'] = new_color

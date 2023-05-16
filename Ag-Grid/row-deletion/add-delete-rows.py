@@ -62,9 +62,9 @@ table = dag.AgGrid(
     rowData=df.to_dict("records"),
     columnSize="sizeToFit",
     defaultColDef=defaultColDef,
-    rowDragManaged=True,
-    rowSelection="multiple",
-    dashGridOptions={"undoRedoCellEditing": True},
+    #rowDragManaged=True,
+    #rowSelection="multiple",
+    dashGridOptions={"undoRedoCellEditing": True,"rowSelection":"multiple", "rowDragManaged":True},
 )
 
 
@@ -149,7 +149,7 @@ def update_dash_table(n_dlt, n_add, data):
             "Source": [""]
         }
         df_new_row = pd.DataFrame(new_row)
-        updated_table = pd.concat([pd.DataFrame(data), df_new_row])
+        updated_table = pd.concat([df_new_row, pd.DataFrame(data)])
         return False, updated_table.to_dict("records")
 
     elif ctx.triggered_id == "delete-row-btn":

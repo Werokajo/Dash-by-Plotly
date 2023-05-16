@@ -8,7 +8,7 @@ import os
 # canada_finance data from Nitin Datta on Kaggle (modified by me):
 # https://www.kaggle.com/datasets/nitindatta/finance-data?select=Finance_data.csv
 
-datasets = [files for path, subdirectory, files in os.walk("\\Users\\adams\\PycharmProjects\\YouTube\\Ag Grid\\save-table\\data")]
+datasets = [files for path, subdirectory, files in os.walk("data")]
 print(datasets[0])
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
