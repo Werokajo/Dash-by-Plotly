@@ -97,12 +97,12 @@ app.layout = dbc.Container(
     ],
 )
 
-# @app.callback(
-#     Output("custom-component-graph-output", "children"),
-#     Input("portfolio-table", "cellRendererData")
-# )
-# def graphClickData(d):
-#     return json.dumps(d)
+@app.callback(
+    Output("custom-component-graph-output", "children"),
+    Input("portfolio-table", "cellRendererData")
+)
+def graphClickData(d):
+    return json.dumps(d)
 
 
 if __name__ == "__main__":

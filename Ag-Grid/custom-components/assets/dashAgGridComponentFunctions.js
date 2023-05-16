@@ -19,7 +19,7 @@ dagcomponentfuncs.Button = function (props) {
 
 
 
-/*
+
 dagcomponentfuncs.DCC_GraphClickData = function (props) {
     const {setData} = props;
     function setProps() {
@@ -36,4 +36,4 @@ dagcomponentfuncs.DCC_GraphClickData = function (props) {
     });
 };
 
-*/
+
