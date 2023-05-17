@@ -1,7 +1,8 @@
-import dash
-from dash.dependencies import Input, Output, State
-import dash_core_components as dcc
-import dash_html_components as html
+# import dash
+# from dash.dependencies import Input, Output, State
+# import dash_core_components as dcc
+# import dash_html_components as html
+from dash import Dash, Input, Output, State, dcc, html
 
 import plotly.express as px
 import pandas as pd
@@ -10,7 +11,7 @@ import pandas as pd
 df = pd.read_csv('https://raw.githubusercontent.com/Coding-with-Adam/Dash-by-Plotly/master/Callbacks/Client-side-callback/opsales.csv')
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
     html.Button('Print Graphs', id='printing'),
@@ -21,26 +22,11 @@ app.layout = html.Div([
     dcc.Graph(id='thr', figure=px.pie(df, names="Customer Segment", values="Sales").update_traces(textinfo='label+percent', showlegend=False)),
 ])
 
-app.clientside_callback(
-    """
-    function(clicks) {
-        if (clicks > 0) {
-          window.print()
-        }
-        return ""
-    }
-    """,
-    Output('hidden-content', 'children'),
-    Input('printing', 'n_clicks')
-)
-
 # app.clientside_callback(
 #     """
 #     function(clicks) {
 #         if (clicks > 0) {
-#         var myWindow = window.open("", "", "width=200,height=100");
-#         myWindow.document.write("<p>A new window!</p>");
-#         myWindow.focus();
+#           window.print()
 #         }
 #         return ""
 #     }
@@ -48,6 +34,21 @@ app.clientside_callback(
 #     Output('hidden-content', 'children'),
 #     Input('printing', 'n_clicks')
 # )
+
+app.clientside_callback(
+    """
+    function(clicks) {
+        if (clicks > 0) {
+        var myWindow = window.open("", "", "width=200,height=100");
+        myWindow.document.write("<p>A new window wow!</p>");
+        myWindow.focus();
+        }
+        return ""
+    }
+    """,
+    Output('hidden-content', 'children'),
+    Input('printing', 'n_clicks')
+)
 
 if __name__ == '__main__':
     app.run_server(debug=True)
