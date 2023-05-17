@@ -29,6 +29,8 @@ app.layout = html.Div(
             id="data-select",
         ),
         html.Br(),
+        html.Div(id="div_output", children='Huhu'),
+        html.Br(),
         dash_table.DataTable(id="my-table-promises", page_size=10),
     ]
 )
@@ -42,6 +44,33 @@ app.clientside_callback(
     }
     """,
     Output("my-table-promises", "data"),
+    Input("data-select", "value"),
+)
+
+app.clientside_callback(
+    """
+    async function(value) {
+    var personObject = { name: "Peter", age: 18, married: false };
+    
+    // Convert the person object into JSON string and save it into storage
+    localStorage.setItem("personObject", JSON.stringify(personObject));
+        
+    // Retrieve the JSON string
+    var jsonString = localStorage.getItem("personObject");
+        
+    // Parse the JSON string back to JS object
+    var retrievedObject = JSON.parse(jsonString);
+    console.log(retrievedObject);
+        
+    // Accessing individual values
+    console.log(retrievedObject.name); // Prints: Peter
+    console.log(retrievedObject.age); // Prints: 18
+    console.log(retrievedObject.married); // Prints: false
+   
+    return 'yep '+jsonString;
+    }
+    """,
+    Output("div_output", "children"),
     Input("data-select", "value"),
 )
 
