@@ -4,7 +4,7 @@ import os
 
 app = Dash(__name__)
 
-file_json = os.path.join("C:",os.sep,"Users","werne","Documents","iris_data.json")
+#file_json = os.path.join("C:",os.sep,"Users","werne","Documents","iris_data.json")
 file_json = "iris_data.json"
 print (file_json)
 
@@ -22,7 +22,7 @@ app.layout = html.Div(
                 },
                 {
                     "label": "Iris local",
-                    "value": file_json,
+                    "value": "http://localhost:8080/price_greek1.json",
                 },
             ],
             value="https://raw.githubusercontent.com/plotly/datasets/master/iris_data.json",
@@ -38,7 +38,7 @@ app.layout = html.Div(
 app.clientside_callback(
     """
     async function(value) {
-    const response = await fetch(value);
+    const response = await fetch(value, {mode:'cors'});
     const data = await response.json();
     return data;
     }
